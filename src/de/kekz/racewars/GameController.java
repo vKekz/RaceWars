@@ -1,6 +1,6 @@
 package de.kekz.racewars;
 
-import de.kekz.racewars.creatures.CreatureFactory;
+import de.kekz.racewars.game.factory.CreatureFactory;
 import de.kekz.racewars.models.Creature;
 import de.kekz.racewars.models.enums.Race;
 
@@ -12,15 +12,12 @@ public class GameController {
     }
 
     private static void runGame() {
-        Creature[] creatures = creatureFactory.getCreaturesByRace(Race.Human, 1000);
+        Creature[] creatures = creatureFactory.buyCreatures(Race.Orc, 1000);
 
         for (Creature creature : creatures) {
             System.out.println(creature.toString());
         }
-
-        creatures[0].attack(creatures[1]);
-
-        System.out.println(" ");
+        System.out.println("Damage: " + creatures[0].attack(creatures[1]));
 
         for (Creature creature : creatures) {
             System.out.println(creature.toString());

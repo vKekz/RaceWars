@@ -6,42 +6,20 @@ import de.kekz.racewars.models.enums.Race;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-/**
- * Represents the race factory that is used to buy and instantiate creatures.
- */
-public class CreatureFactory {
+public final class CreatureRegistry {
     private static final HashMap<Race, Supplier<Creature>> creatures = new HashMap<>(Race.values().length);
 
     /**
-     * Initializes a new instance of the {@link CreatureFactory} class.
+     * Initializes a new instance of the {@link CreatureRegistry} class.
      */
-    public CreatureFactory() {
+    public CreatureRegistry() {
         registerCreatures();
     }
 
     /**
-     * Returns an array of creatures given by the race and available budget.
+     * Returns a new creature instance given by the race.
      */
-    public Creature[] getCreaturesByRace(Race race, int budget) {
-        int leaderCost = race.getLeaderCost();
-        if (budget < leaderCost + race.getCost()) {
-            return new Creature[0];
-        }
-
-        // Make sure to subtract the leader cost first
-        int creatureCount = (budget - leaderCost) / race.getCost();
-
-        Creature[] creatures = new Creature[creatureCount];
-        creatures[0] = getCreatureByRace(race.getLeader());
-
-        for (int i = 1; i < creatures.length; i++) {
-            creatures[i] = getCreatureByRace(race);
-        }
-
-        return creatures;
-    }
-
-    private Creature getCreatureByRace(Race race) {
+    public Creature getCreatureByRace(Race race) {
         Supplier<Creature> supplier = creatures.get(race);
         if (supplier == null) {
             throw new NullPointerException("Supplier for " + race.name() + " not registered");

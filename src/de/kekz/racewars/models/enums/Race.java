@@ -14,7 +14,9 @@ public enum Race {
     Human(110, Mage),
 
     DemonSlayer(),
-    DarkElf(145, DemonSlayer);
+    DarkElf(145, DemonSlayer),
+
+    Ghost();
 
     private int cost;
     private int leaderCost;

@@ -7,7 +7,7 @@ import de.kekz.racewars.models.enums.Race;
  * Represents the ghost creature.
  */
 class Ghost extends Creature {
-    Ghost(Race race, double health, double armor, double damage, double speed) {
-        super(race, health, armor, damage, speed);
+    private Ghost() {
+        super(Race.Ghost, 0D, 0D, 0D, 0D);
     }
 }
